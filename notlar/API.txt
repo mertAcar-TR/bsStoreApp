@@ -1,0 +1,18 @@
+APPLICATION PROGRAMMING INTERFACE(API):
+-----------------------------------------
+* Integrated web uygulamaları geliştirmek ve kurmak için bir dizi tanımlar ve protokollerden oluşan bir uygulama programlama arayüzüdür
+* API sizin ürün ya da servisinizin,uygulama detayları ve teknoloji tercihlerinden bağımsız olarak başka ürün ya da servislere ile iletişim kurmasına olanak tanır.
+
+* DAĞITIK API'ların TARİHİ:
+---------------------------
+* 1970-1980 ==> RPC,Messaging,Queuning ==> Dağıtık hesaplamanın ortaya çıkışı
+* 1990'lar ==> COM/DCOM,CORBA,Java RMI ==> Nesne tabanlı API'lar
+* 2000-2020 ==> XMLHTTP,SOAP,REST,GraphQL,gRPC => Web Tabanlı API'lar
+
+* Persistence katmanı == DataAccess katmanı
+* Servis katmanı uygulamanın ana düşüncesinin gerçekleştiği yerdir.(iş mantığı burda modellenir.)
+* API'ler Presentation katmanında bulunur.
+* API'da View katmanı yoktur.Frontend sistemi bir nevi View katmanıdır.(View'ı Frontend halleder.)
+* Frontend sistemi presentation katmanına bir istek atar,presentation gelen isteğin body'sine header'ına vs.bakar ve bunu servise iletir,gelen cevap tekrar frontend system'e aktarılır.
+* Backend as a service(BaaS),Backend as a function(BaaF)'de minimal API tasarım yöntemleridir.
+* Bir web sitesi yapıyorsan,bir single page application (SPA) yapıyorsan,bir mobil uygulama yapıyorsan,bir servis ya da hizmet geliştirmek istiyorsan API kullanabilirsin.

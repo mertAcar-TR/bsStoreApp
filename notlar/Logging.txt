@@ -1,0 +1,3 @@
+* readonly atanan bir değer sadece Ctor'da veya Tanimlandiği yerde değer verilebilir.
+
+* IoC kaydı yapıcaksak ya da servis konfigürasyonu yapıcaksak önce servis kaydı alırız.

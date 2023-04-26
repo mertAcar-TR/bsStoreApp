@@ -1,0 +1,3 @@
+* Static bir sınıfın ctor'u public yerine static ile başlar.
+
+* [ApiController] sınıfa bir behavior kazandırır ve kod hata verdiğinde eksra bilgiler gösterir

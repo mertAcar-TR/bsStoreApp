@@ -1,0 +1,10 @@
+REPRESENTATIONAL STATE TRANSFER
+-------------------------------
+* curl:
+- Client URL
+- Unix bazlı sistemde mevcut olan bir komuttur.
+- Curl komutları URL'lerin bağlanabilirliğini kontrol etmek ve veri transferi için harika bir araç olarak kullanılmak için üretilmiştir.
+- Curl,istemci tarafındaki ücretsiz bir URL transfer kütüphanesidir.
+- HTTP,HTTPS,FTP,FTPS,IMAP,IMAPS,SFTP,TELNET,GOPHER,LDAP,LDAPS,SMTP,SMTPS gibi protokolleri destekler.
+
+- usage:curl [options...] <url> ==> köşeli parantez isteğe bağlı olduğunu ifade eder.<> ise parametredir zorunludur.
