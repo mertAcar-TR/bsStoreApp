@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace Repositories.Migrations
+namespace WebApi.Migrations
 {
-    public partial class initial : Migration
+    public partial class startPoint : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
