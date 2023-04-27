@@ -35,10 +35,7 @@ namespace Presentation.Controllers
             {
             
                 var book = _manager.BookService.GetOneBookById(id, false);
-                if (book is null)
-                {
-                     throw new BookNotFoundException(id);
-                }
+               
                 
                     return Ok(book);
                 
@@ -83,14 +80,7 @@ namespace Presentation.Controllers
             public IActionResult PatchBook([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<Book> bookPatch)
             {
                 var book = _manager.BookService.GetOneBookById(id, true);
-                if (book is null)
-                {
-                    return NotFound(new
-                    {
-                        StatusCode = 404,
-                        Message = $"Book with id:{id} could not found"
-                    });//404
-                }
+               
                 bookPatch.ApplyTo(book);
                 _manager.BookService.UpdateOneBook(id, book, true);
                 return NoContent();
