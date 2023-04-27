@@ -1,4 +1,5 @@
-﻿using Entities.Exceptions;
+﻿using Entities.DataTransferObjects;
+using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -61,11 +62,11 @@ namespace Presentation.Controllers
                 
             }
             [HttpPut("{id:int}")]
-            public IActionResult UpdateBook([FromRoute(Name = "id")] int id, [FromBody] Book book)
+            public IActionResult UpdateBook([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
             {
-                if (book is null)
+                if (bookDto is null)
                     return BadRequest();
-                _manager.BookService.UpdateOneBook(id, book, true);
+                _manager.BookService.UpdateOneBook(id, bookDto, true);
 
                 return NoContent();
             }
@@ -82,7 +83,7 @@ namespace Presentation.Controllers
                 var book = _manager.BookService.GetOneBookById(id, true);
                
                 bookPatch.ApplyTo(book);
-                _manager.BookService.UpdateOneBook(id, book, true);
+                _manager.BookService.UpdateOneBook(id, new BookDtoForUpdate(book.Id,book.Title,book.Price), true);
                 return NoContent();
             }
         }

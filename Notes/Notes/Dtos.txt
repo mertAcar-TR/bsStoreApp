@@ -1,0 +1,7 @@
+﻿* Dto'lar readonly olmalı yani değiştirilmemeli.(immutable)
+  Değişecekse yenisi oluşturulmalı.
+* LINQ desteği vardır.
+* Reference type'dır.
+* Ctor tanımlama şansı verir.
+* {get;set;} de set yerine init yazarak ilk maddeyi gerçekleştirirsin.
+  tanımlandığı yerde set ediceksin.Ondan sonra değiştiremezsin,değişmez.
