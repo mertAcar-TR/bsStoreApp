@@ -1,0 +1,71 @@
+REST API BİLEŞENLERİ-TASARIMI
+------------------------------
+VERB:Bu fiili kullanmak için bir endpoint(kaynak tanımlayıcısına) ihtiyaç vardır.(URI(query string))
+
+REST:İstemci ile sunucu arasındaki kaynağın exchange edilmesidir.
+
+* Response için best practice json formatı ama başka formatlarda kullanılabilir.
+
+-URIs
+-----
+* URI'ler kaynakların sadece bir parçasıdır.
+  - ./books
+  - ./books/lastest
+  - ./books/mostread
+  - query string de verebilirsin
+
+* Veri olmayan öğeler için sorgu dizileri (Query String)
+  - Sıralama
+  - Arama
+  - Format kullanılmaz.
+
+* İsimler iyi,fiiller kötü
+  - /getBooks,/getBooksByTitle,/getNewBooks,/verifyOrders,/saveBook,/updateBook,/deleteBook,.... olmaz.
+  - /books,/categories/products,/employees,/authors ... olur/olmalı.
+ 
+* URI içerisinde Tanımlayıcılar kullanılabilir
+  - URI içinde tanımlayıcıları kullanınız.
+  - Tanımlayıcılar illa primary kerre olmak zorunda değildir.
+  - /books,/books/1,/books/devlet,/books/bs-101...
+
+* Query String
+  - Kaynak olmayan özellikler için Query string kullanın.
+  - /books?sort=title,/books?page=1,/books?pageNumber=1&pageSize=10
+  - /books?format=json kullanılmaz.
+
+-Idempotency
+------------
+* Idempotent:Sonucu değiştirmeden defalarca uygulanabilen işlemi ifade eder.
+* İşlem sonuçları GET,PUT,PATCH ve DELETE eylemlerinde aynıdır.
+* POST idompontent değildir.
+
+* Format için Query String kullanmayın best practice application/json dur
+* Sonuçların kendini tanımlamasını sağlayınız.
+* Programlı gezinmeye izin veriniz.
+* Sayfalama,sıralama,filtreleme ve arama desteği sağlayınız.
+* Önbellek desteği sununuz.
+* Sorgu sınırı getiriniz.
+* Veri şekillendirilmesini sağlayınız.
+* Versiyonlama yapınız.
+* Belgelendirmeye özen gösteriniz.
+* Her API'da olmasa veri şekillendirme yapılabilir.
+
+-Hypermedia
+------------
+* Hipermedya yardımcı olabilir ancak pragmatizm, çoğu projenin buna ihtiyaç duymadığı anlamına gelir.
+
+-Olgunlaşma Seviyesi
+----------------------
+* Level 0:
+  - One URI
+  - All operations POST
+* Level 1:
+  - URIs for individual resources
+* Level 2:
+  - HTTP methods to defines to define operations on resources
+* Level 3:
+  - HATEOAS
+  - Use hypermedia
+
+* API yayınladıktan sonra değiştirmeyin.
+* İyi tasarlanmış bir API olgunlaşabilir.
