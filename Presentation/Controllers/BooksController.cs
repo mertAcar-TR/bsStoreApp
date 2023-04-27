@@ -32,6 +32,7 @@ namespace Presentation.Controllers
             [HttpGet("{id:int}")]
             public IActionResult GetBook([FromRoute(Name = "id")] int id)
             {
+            throw new Exception("!!");
                 var book = _manager.BookService.GetOneBookById(id, false);
                 if (book is null)
                 {
@@ -41,6 +42,7 @@ namespace Presentation.Controllers
                 {
                     return Ok(book);
                 }
+            
             }
             //[HttpPost]
             //public IActionResult GetAllBooks([FromBody] Book book)
@@ -51,8 +53,7 @@ namespace Presentation.Controllers
             [HttpPost]
             public IActionResult CreateOneBook([FromBody] Book book)
             {
-                try
-                {
+                
                     if (book is null)
                     {
                         return BadRequest();//400
@@ -60,12 +61,7 @@ namespace Presentation.Controllers
                     _manager.BookService.CreateOneBook(book);
 
                     return StatusCode(201, book);
-                }
-                catch (Exception ex)
-                {
-
-                    return BadRequest(ex.Message);
-                }
+                
             }
             [HttpPut("{id:int}")]
             public IActionResult UpdateBook([FromRoute(Name = "id")] int id, [FromBody] Book book)

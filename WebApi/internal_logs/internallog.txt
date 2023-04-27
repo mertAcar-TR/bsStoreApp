@@ -3,3 +3,31 @@
 2023-04-26 15:23:04.6057 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
 2023-04-26 15:23:39.3629 Info AppDomain Shutting down. LogFactory closing...
 2023-04-26 15:23:39.3868 Info LogFactory has been closed.
+2023-04-27 10:26:15.4106 Info Message Template Auto Format enabled
+2023-04-27 10:26:15.5056 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 10:26:15.5640 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-27 10:28:26.3283 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 10:28:26.3532 Info LogFactory has been closed.
+2023-04-27 10:28:35.7485 Info Message Template Auto Format enabled
+2023-04-27 10:28:35.8906 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 10:28:35.9403 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-27 10:28:47.1021 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 10:28:47.1213 Info LogFactory has been closed.
+2023-04-27 10:29:50.9673 Info Message Template Auto Format enabled
+2023-04-27 10:29:51.8733 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 10:29:52.0630 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-27 10:30:38.0259 Info Message Template Auto Format enabled
+2023-04-27 10:30:38.1178 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 10:30:38.1627 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-27 10:34:20.5941 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 10:34:20.6227 Info LogFactory has been closed.
+2023-04-27 10:35:30.1579 Info Message Template Auto Format enabled
+2023-04-27 10:35:30.2375 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 10:35:30.2700 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-27 10:36:01.9675 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 10:36:01.9852 Info LogFactory has been closed.
+2023-04-27 10:36:21.4682 Info Message Template Auto Format enabled
+2023-04-27 10:36:21.5551 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 10:36:21.5922 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-27 10:36:30.0533 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 10:36:30.0838 Info LogFactory has been closed.
