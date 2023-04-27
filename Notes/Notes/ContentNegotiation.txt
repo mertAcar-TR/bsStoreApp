@@ -1,0 +1,5 @@
+﻿* Farklı formatlarda cevap ürütmek ve neye kabul edip etmiyeceğinizi dikkate almak konusu içerik pazarlığına girer.
+
+* İstemciden Api'ye gelen Accept ifadesinde '/*' gibi ifadeler varsa bu içerik pazarlığına kapalıdır.
+
+* Eğer api istenilen dönüş türünü desteklemiyorsa 406 kodu ile dönüş yapılır.
