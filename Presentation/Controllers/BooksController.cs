@@ -25,17 +25,17 @@ namespace Presentation.Controllers
             }
 
             [HttpGet]
-            public IActionResult GetAllBooks()
+            public async Task<IActionResult> GetAllBooksAsync()
             {
-                var books = _manager.BookService.GetAllBooks(false);
+                var books = await _manager.BookService.GetAllBooksAsync(false);
 
                 return Ok(books);
             }
             [HttpGet("{id:int}")]
-            public IActionResult GetBook([FromRoute(Name = "id")] int id)
+            public async Task<IActionResult> GetBookAsync([FromRoute(Name = "id")] int id)
             {
             
-                var book = _manager.BookService.GetOneBookById(id, false);
+                var book = await _manager.BookService.GetOneBookByIdAsync(id, false);
                
                 
                     return Ok(book);
@@ -49,7 +49,7 @@ namespace Presentation.Controllers
             //    return StatusCode(201);//created
             //}
             [HttpPost]
-            public IActionResult CreateOneBook([FromBody] BookDtoForInsertion bookDto)
+            public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
             {
                 
                     if (bookDto is null)
@@ -60,13 +60,13 @@ namespace Presentation.Controllers
                     {
                         return UnprocessableEntity(ModelState);
                     }
-                    _manager.BookService.CreateOneBook(bookDto);
+                    await _manager.BookService.CreateOneBookAsync(bookDto);
 
                     return StatusCode(201, bookDto);//CreatedAtRoute() metodu ile ekleme yaparsak Response'un header'ına bir location bilgisi koyabiliriz.
                 
             }
             [HttpPut("{id:int}")]
-            public IActionResult UpdateBook([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
+            public async Task<IActionResult> UpdateBookAsync([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
             {
                 if (bookDto is null)
                     return BadRequest();
@@ -74,25 +74,25 @@ namespace Presentation.Controllers
                 {
                     return UnprocessableEntity(ModelState);
                 }
-            _manager.BookService.UpdateOneBook(id, bookDto, false);
+           await  _manager.BookService.UpdateOneBookAsync(id, bookDto, false);
 
                 return NoContent();
             }
 
             [HttpDelete("{id:int}")]
-            public IActionResult DeleteBook([FromRoute(Name = "id")] int id)
+            public async Task<IActionResult> DeleteBookAsync([FromRoute(Name = "id")] int id)
             {
-                _manager.BookService.DeleteOneBook(id, false);
+                await _manager.BookService.DeleteOneBookAsync(id, false);
                 return NoContent();
             }
             [HttpPatch("{id:int}")]
-            public IActionResult PatchBook([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<BookDtoForUpdate> bookPatch)
+            public async Task<IActionResult> PatchBookAsync([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<BookDtoForUpdate> bookPatch)
             {
                 if (bookPatch is null)
                 {
                 return BadRequest();
                 }
-                var result = _manager.BookService.GetOneBookForPatch(id, false);
+                var result = await _manager.BookService.GetOneBookForPatchAsync(id, false);
                
                 bookPatch.ApplyTo(result.bookDtoForUpdate,ModelState);
                 TryValidateModel(result.bookDtoForUpdate);
@@ -100,7 +100,7 @@ namespace Presentation.Controllers
                  {
                      return UnprocessableEntity(ModelState);
                  }
-                _manager.BookService.SaveChangesForPatch(result.bookDtoForUpdate,result.book);
+                await _manager.BookService.SaveChangesForPatchAsync(result.bookDtoForUpdate,result.book);
                 return NoContent();
             }
         }
