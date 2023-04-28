@@ -38,4 +38,10 @@
 
   - "await" anahtar kelimesinin kullanılması zorunlu değildir.
 
-  - "await" anahtar kelimesi yalnızca bir kez kullanılmak zorunda da değildir
+  - "await" anahtar kelimesi yalnızca bir kez kullanılmak zorunda da değildir.
+
+* Create,Update,Delete işlemlerinde asenkron bir iş yapmayacağız.Ef core tracking bazlı çalışır.
+  İzlediği için bu olaylar kalıcı olmuyor.Bunlar manager üzerinde save methodunu çalıştırdığın
+  zaman kalıcı hale gelir.Yani save methodunu asenkron yapmalısın.
+
+* Eğer dönüş tipi void'se Task<void> yazılmaz sadece void yazılır.
