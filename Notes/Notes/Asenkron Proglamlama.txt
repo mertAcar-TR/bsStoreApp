@@ -42,6 +42,6 @@
 
 * Create,Update,Delete işlemlerinde asenkron bir iş yapmayacağız.Ef core tracking bazlı çalışır.
   İzlediği için bu olaylar kalıcı olmuyor.Bunlar manager üzerinde save methodunu çalıştırdığın
-  zaman kalıcı hale gelir.Yani save methodunu asenkron yapmalısın.
+  zaman kalıcı hale gelir.Yani save methodunu asenkron yapmalısın.(Repository için)
 
 * Eğer dönüş tipi void'se Task<void> yazılmaz sadece void yazılır.
