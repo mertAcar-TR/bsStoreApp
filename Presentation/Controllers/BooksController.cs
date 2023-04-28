@@ -56,6 +56,10 @@ namespace Presentation.Controllers
                     {
                         return BadRequest();//400
                     }
+                    if (!ModelState.IsValid)
+                    {
+                        return UnprocessableEntity(ModelState);
+                    }
                     _manager.BookService.CreateOneBook(bookDto);
 
                     return StatusCode(201, bookDto);//CreatedAtRoute() metodu ile ekleme yaparsak Response'un header'ına bir location bilgisi koyabiliriz.
@@ -66,7 +70,11 @@ namespace Presentation.Controllers
             {
                 if (bookDto is null)
                     return BadRequest();
-                _manager.BookService.UpdateOneBook(id, bookDto, true);
+                if (!ModelState.IsValid)
+                {
+                    return UnprocessableEntity(ModelState);
+                }
+            _manager.BookService.UpdateOneBook(id, bookDto, false);
 
                 return NoContent();
             }
@@ -78,17 +86,21 @@ namespace Presentation.Controllers
                 return NoContent();
             }
             [HttpPatch("{id:int}")]
-            public IActionResult PatchBook([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<BookDto> bookPatch)
+            public IActionResult PatchBook([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<BookDtoForUpdate> bookPatch)
             {
-                var bookDto = _manager.BookService.GetOneBookById(id, true);
-               
-                bookPatch.ApplyTo(bookDto);
-                _manager.BookService.UpdateOneBook(id, new BookDtoForUpdate
+                if (bookPatch is null)
                 {
-                    Id=bookDto.Id,
-                    Title=bookDto.Title,
-                    Price=bookDto.Price
-                }, true);
+                return BadRequest();
+                }
+                var result = _manager.BookService.GetOneBookForPatch(id, false);
+               
+                bookPatch.ApplyTo(result.bookDtoForUpdate,ModelState);
+                TryValidateModel(result.bookDtoForUpdate);
+                if (!ModelState.IsValid)
+                 {
+                     return UnprocessableEntity(ModelState);
+                 }
+            _manager.BookService.SaveChangesForPatch(result.bookDtoForUpdate,result.book);
                 return NoContent();
             }
         }

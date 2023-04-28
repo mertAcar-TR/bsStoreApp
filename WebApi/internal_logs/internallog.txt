@@ -82,3 +82,23 @@
 2023-04-27 16:03:59.7146 Info Message Template Auto Format enabled
 2023-04-27 16:03:59.8447 Info Registered target NLog.Targets.FileTarget(Name=logfile)
 2023-04-27 16:03:59.8780 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-28 10:17:01.3176 Info Message Template Auto Format enabled
+2023-04-28 10:17:01.4315 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-28 10:17:01.4649 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-28 10:20:44.6255 Info AppDomain Shutting down. LogFactory closing...
+2023-04-28 10:20:44.6446 Info LogFactory has been closed.
+2023-04-28 10:27:54.0143 Info Message Template Auto Format enabled
+2023-04-28 10:27:54.1367 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-28 10:27:54.1761 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-28 10:39:52.7668 Info AppDomain Shutting down. LogFactory closing...
+2023-04-28 10:39:52.7895 Info LogFactory has been closed.
+2023-04-28 10:39:59.0264 Info Message Template Auto Format enabled
+2023-04-28 10:39:59.1182 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-28 10:39:59.1687 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-28 10:42:39.4875 Info AppDomain Shutting down. LogFactory closing...
+2023-04-28 10:42:39.5048 Info LogFactory has been closed.
+2023-04-28 11:10:18.2180 Info Message Template Auto Format enabled
+2023-04-28 11:10:18.3144 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-28 11:10:18.3502 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\merta\source\repos\bsStoreApp\WebApi\nlog.config
+2023-04-28 11:13:58.7258 Info AppDomain Shutting down. LogFactory closing...
+2023-04-28 11:13:58.7441 Info LogFactory has been closed.

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using Entities.DataTransferObjects;
 using Entities.Exceptions;
 using Entities.Models;
@@ -56,6 +57,25 @@ namespace Services
                 throw new BookNotFoundException(id);
             return _mapper.Map<BookDto>(book);
         }
+
+        public (BookDtoForUpdate bookDtoForUpdate, Book book) GetOneBookForPatch(int id, bool trackChanges)
+        {
+            var book = _manager.Book.GetOneBookById(id, trackChanges);
+
+            if(book is null) { throw new BookNotFoundException(id); }
+
+            var bookDtoForUpdate = _mapper.Map<BookDtoForUpdate>(book);
+
+            return (bookDtoForUpdate, book);
+        }
+
+        public void SaveChangesForPatch(BookDtoForUpdate bookDtoForUpdate,Book book)
+        {
+            _mapper.Map(bookDtoForUpdate, book);
+            _manager.Save();
+        }
+
+       
 
         public void UpdateOneBook(int id, BookDtoForUpdate bookDto, bool trackChanges)
         {
