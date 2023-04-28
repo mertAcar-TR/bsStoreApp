@@ -49,16 +49,16 @@ namespace Presentation.Controllers
             //    return StatusCode(201);//created
             //}
             [HttpPost]
-            public IActionResult CreateOneBook([FromBody] Book book)
+            public IActionResult CreateOneBook([FromBody] BookDtoForInsertion bookDto)
             {
                 
-                    if (book is null)
+                    if (bookDto is null)
                     {
                         return BadRequest();//400
                     }
-                    _manager.BookService.CreateOneBook(book);
+                    _manager.BookService.CreateOneBook(bookDto);
 
-                    return StatusCode(201, book);
+                    return StatusCode(201, bookDto);//CreatedAtRoute() metodu ile ekleme yaparsak Response'un header'ına bir location bilgisi koyabiliriz.
                 
             }
             [HttpPut("{id:int}")]
@@ -78,12 +78,17 @@ namespace Presentation.Controllers
                 return NoContent();
             }
             [HttpPatch("{id:int}")]
-            public IActionResult PatchBook([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<Book> bookPatch)
+            public IActionResult PatchBook([FromRoute(Name = "id")] int id, [FromBody] JsonPatchDocument<BookDto> bookPatch)
             {
-                var book = _manager.BookService.GetOneBookById(id, true);
+                var bookDto = _manager.BookService.GetOneBookById(id, true);
                
-                bookPatch.ApplyTo(book);
-                _manager.BookService.UpdateOneBook(id, new BookDtoForUpdate(book.Id,book.Title,book.Price), true);
+                bookPatch.ApplyTo(bookDto);
+                _manager.BookService.UpdateOneBook(id, new BookDtoForUpdate
+                {
+                    Id=bookDto.Id,
+                    Title=bookDto.Title,
+                    Price=bookDto.Price
+                }, true);
                 return NoContent();
             }
         }
