@@ -1,0 +1,41 @@
+﻿* .Net dünyasında;
+   - Asynchronous Programming Model (APM),
+   - Event-based Asynchronous Pattern (EAP),
+   - TASK-BASED ASYNCHRONUS PATTERN (TAP)
+   modelleri vardır.
+
+-- Senkron Proglamlamada gelen istekler Thread Pool da toplanır ve thread
+   pool'dan bir thread oluşur.Eğer thread pool çok dolduysa sonraki gelicek
+   istekler beklemek zorunda kalır.İşlemler aynı iş hattı üzerindedir.
+
+* Asenkron proglamada ise thread pool a gelen yeni isteklerin ve oluşacak
+  threadlerin beklemesine gerek yoktur.İşlemler ayrı ayrı iş hatları üzerinde dönebilir.
+
+* İki programlama türü içinde örnek verelim bir işlem için aynı miktarda sistem kaynağı
+  tüketilir,aynı miktarda beklersiniz.Ama bloklama süreleri farkı olucağından asenkron
+  programlamada bir performans artışı görülebilir.
+
+* Task: 
+
+  - Çalıştırılan thread yapılarınının yönetimini sağlar.Task objesi temel olarak
+    üstlendiği işleri thread pool üzerinde asenkron olarak çalıştırır.
+
+  - Task anahtar kelimesinin asenkron metot tanımlarken kullanılması gerektiğini
+    ancak sonucu temsil etmediğini anlamak önemlidir.
+
+  - Task içerisinde "Status","IsCompleted","IsCanceled","IsFaulted" gibi çok
+    sayıda property barındırır.
+
+  - Task ile biz operasyonun tamamlanıp tamanlanmadığını izleyebiliriz.
+
+* await:
+  
+  - Sonuçların asenkron operasyondan çıkartılmasını sağlar.
+  
+  - Operasyonun başarısını doğrular.
+
+  - Zaman uyumsuz yöntemde kodun geri kalanını yürütmek için devamı sağlar.
+
+  - "await" anahtar kelimesinin kullanılması zorunlu değildir.
+
+  - "await" anahtar kelimesi yalnızca bir kez kullanılmak zorunda da değildir
