@@ -100,7 +100,7 @@ namespace Presentation.Controllers
                  {
                      return UnprocessableEntity(ModelState);
                  }
-            _manager.BookService.SaveChangesForPatch(result.bookDtoForUpdate,result.book);
+                _manager.BookService.SaveChangesForPatch(result.bookDtoForUpdate,result.book);
                 return NoContent();
             }
         }
