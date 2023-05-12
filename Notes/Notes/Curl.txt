@@ -8,3 +8,6 @@ REPRESENTATIONAL STATE TRANSFER
 - HTTP,HTTPS,FTP,FTPS,IMAP,IMAPS,SFTP,TELNET,GOPHER,LDAP,LDAPS,SMTP,SMTPS gibi protokolleri destekler.
 
 - usage:curl [options...] <url> ==> köşeli parantez isteğe bağlı olduğunu ifade eder.<> ise parametredir zorunludur.
+
+
+merhaba
