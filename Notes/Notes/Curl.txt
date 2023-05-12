@@ -10,4 +10,3 @@ REPRESENTATIONAL STATE TRANSFER
 - usage:curl [options...] <url> ==> köşeli parantez isteğe bağlı olduğunu ifade eder.<> ise parametredir zorunludur.
 
 
-merhaba  fsda
