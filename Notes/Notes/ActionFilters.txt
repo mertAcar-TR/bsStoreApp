@@ -1,0 +1,8 @@
+﻿* Action Filter bir Controller ya da Controller içindeki Action yapısına uygulanan ve bu yolla
+ilgili yapının düzenlemesine olanak sağlayan bir "attribute" olarak ifade edilebilir.
+
+* Authorization filters,Resource filters,Action filters,Exception filters,Result filters
+
+* IActionFilter,IAsyncActionFilter,ActionFilterAttribute(abstract class) kullanarak action filter implemente edilebilir.
+
+* Ioc kaydını yaptıktak sonra controller'ın üstünde [ServiceFilter(typeof())] yapısını kullanarak action filterı kullanabiliriz.

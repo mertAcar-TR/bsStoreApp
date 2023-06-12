@@ -3,6 +3,7 @@ using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.ActionFilters;
 using Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -48,23 +49,18 @@ namespace Presentation.Controllers
             //    _logger.LogWarning("Book has been created!");
             //    return StatusCode(201);//created
             //}
+
+            [ServiceFilter(typeof(ValidationFilterAttribute))]
             [HttpPost]
             public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
             {
-                
-                    if (bookDto is null)
-                    {
-                        return BadRequest();//400
-                    }
-                    if (!ModelState.IsValid)
-                    {
-                        return UnprocessableEntity(ModelState);
-                    }
+             
                     await _manager.BookService.CreateOneBookAsync(bookDto);
 
                     return StatusCode(201, bookDto);//CreatedAtRoute() metodu ile ekleme yaparsak Response'un header'ına bir location bilgisi koyabiliriz.
                 
             }
+            [ServiceFilter(typeof(ValidationFilterAttribute))]
             [HttpPut("{id:int}")]
             public async Task<IActionResult> UpdateBookAsync([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
             {

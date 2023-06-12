@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ActionFilters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActionFilters\" />
+  </ItemGroup>
 </Project>
