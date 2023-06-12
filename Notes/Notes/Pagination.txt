@@ -1,0 +1,9 @@
+﻿* Paging,API'dan sonuçların kısmi olarak alınmasıdır.
+
+* İstemci olarak bir istekte bulunduk.Cevap olarak yüzlerce,binlerce satır dönebilir.
+Bu cevapları komple istemciye gönderip istemcide bir sayfalama işlemi yapılmasını beklemek mantıklı bir hamle değil.
+(Seni kısıtlayan bir bant genişliği var,bu tip işlemler sonsuz baz alınarak tasarlanır,kaynak tüketimi ve hafıza sorunları)
+
+* Bir şey kaynaktan bağımsızsa onu query string olarak tanımlayabilirsin.
+
+* Header'ların clientlar tarafından okunabilmesi için bir izin tanımı yapılmalı.

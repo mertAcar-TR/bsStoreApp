@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <None Remove="LogModel\" />
+    <None Remove="RequestFeatures\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LogModel\" />
+    <Folder Include="RequestFeatures\" />
   </ItemGroup>
 </Project>
