@@ -11,11 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 // Add services to the container.
 builder.Services.AddControllers(config => {   
-    config.RespectBrowserAcceptHeader = true;//��erik pazarl���na a��k hale geldi
+    config.RespectBrowserAcceptHeader = true;//İçerik pazarlanacak hale geldi
     config.ReturnHttpNotAcceptable = true;
 }).AddCustomCsvFormatter().AddXmlDataContractSerializerFormatters().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly).AddNewtonsoftJson();
 
-builder.Services.AddScoped<ValidationFilterAttribute>(); 
+
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
@@ -31,6 +31,7 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();
 builder.Services.AddAutoMapper(typeof(Program));//Web API referans�n� verdik.
+builder.Services.ConfigureActionFilters();
 
 var app = builder.Build();
 

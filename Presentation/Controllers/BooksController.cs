@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
+    //[ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
     [Route("api/books")]
     public class BooksController:ControllerBase
@@ -50,7 +51,7 @@ namespace Presentation.Controllers
             //    return StatusCode(201);//created
             //}
 
-            [ServiceFilter(typeof(ValidationFilterAttribute))]
+            [ServiceFilter(typeof(ValidationFilterAttribute))]//typeof'dan sonra virgül koyup Order property'si ile sıralama yapabiliriz.
             [HttpPost]
             public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
             {

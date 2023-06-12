@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="LogModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LogModel\" />
+  </ItemGroup>
 </Project>

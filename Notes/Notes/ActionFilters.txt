@@ -6,3 +6,6 @@ ilgili yapının düzenlemesine olanak sağlayan bir "attribute" olarak ifade ed
 * IActionFilter,IAsyncActionFilter,ActionFilterAttribute(abstract class) kullanarak action filter implemente edilebilir.
 
 * Ioc kaydını yaptıktak sonra controller'ın üstünde [ServiceFilter(typeof())] yapısını kullanarak action filterı kullanabiliriz.
+
+* Loglama sistematik olmalı,tercihen json formatında olmalı,her şey logda tutulmamalı özellikle hassas bilgiler(
+tc no ,şifre,kredi kartı vs.)
