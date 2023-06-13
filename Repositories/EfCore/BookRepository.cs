@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repositories.EfCore.Extensions;
 
 namespace Repositories.EfCore
 {
@@ -25,7 +26,7 @@ namespace Repositories.EfCore
 
         public async Task<PagedList<Book>> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges)
         {
-           var books= await FindAll(trackChanges).FilterBooks(bookParameters.MinPrice,bookParameters.MaxPrice).Search(bookParameters.SearchTerm).OrderBy(b => b.Id).ToListAsync();
+           var books= await FindAll(trackChanges).FilterBooks(bookParameters.MinPrice,bookParameters.MaxPrice).Search(bookParameters.SearchTerm).Sort(bookParameters.OrderBy).ToListAsync();
             return PagedList<Book>.ToPagedList(books,bookParameters.PageNumber,bookParameters.PageSize);
         } 
 

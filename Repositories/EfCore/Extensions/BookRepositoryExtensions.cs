@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using Entities.Models;
+using System.Linq.Dynamic.Core;
+using System.Text;
 
-namespace Repositories.EfCore
+namespace Repositories.EfCore.Extensions
 {
 	public static class BookRepositoryExtensions
 	{
@@ -19,6 +22,17 @@ namespace Repositories.EfCore
 			return books.Where(book => book.Title.ToLower().Contains(lowerCaseTerm));
 
             //lucene.net => arama kütüphanesi
+        }
+
+		public static IQueryable<Book> Sort(this IQueryable<Book> books,string orderByQueryString)
+		{
+			if (string.IsNullOrWhiteSpace(orderByQueryString)) { return books.OrderBy(b=>b.Id); }
+
+			var orderQuery = OrderQueryBuilder.CreateOrderQuery<Book>(orderByQueryString);
+
+			if (orderQuery is null) { return books.OrderBy(b=>b.Id); }
+
+			return books.OrderBy(orderQuery);
         }
     }
 }
