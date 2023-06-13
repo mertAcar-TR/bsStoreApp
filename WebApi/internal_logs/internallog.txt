@@ -129,3 +129,6 @@
 2023-06-13 10:20:59.5046 Info Message Template Auto Format enabled
 2023-06-13 10:20:59.5394 Info Registered target NLog.Targets.FileTarget(Name=logfile)
 2023-06-13 10:20:59.5693 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=/Users/mertacar/Projects/bsStoreApp/WebApi/nlog.config
+2023-06-13 10:53:30.9472 Info Message Template Auto Format enabled
+2023-06-13 10:53:30.9818 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-13 10:53:31.0135 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=/Users/mertacar/Projects/bsStoreApp/WebApi/nlog.config
