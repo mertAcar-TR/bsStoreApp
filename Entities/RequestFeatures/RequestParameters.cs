@@ -18,6 +18,8 @@ namespace Entities.RequestFeatures
 		}
 
 		public string? OrderBy { get; set; }
-	}
+		public String? Fields { get; set; } //data shaping
+
+    }
 }
 
