@@ -9,9 +9,15 @@
   <ItemGroup>
     <None Remove="LogModel\" />
     <None Remove="RequestFeatures\" />
+    <None Remove="LinkModels\" />
+    <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LogModel\" />
     <Folder Include="RequestFeatures\" />
+    <Folder Include="LinkModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
   </ItemGroup>
 </Project>

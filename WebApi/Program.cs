@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using Presentation.ActionFilters;
 using Repositories.EfCore;
+using Services;
 using Services.Contracts;
 using WebApi.Extensions;
 
@@ -10,10 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 // Add services to the container.
-builder.Services.AddControllers(config => {   
+builder.Services.AddControllers(config =>
+{
     config.RespectBrowserAcceptHeader = true;//İçerik pazarlanacak hale geldi
     config.ReturnHttpNotAcceptable = true;
-}).AddCustomCsvFormatter().AddXmlDataContractSerializerFormatters().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly).AddNewtonsoftJson();
+}).AddXmlDataContractSerializerFormatters().AddCustomCsvFormatter().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);//AddNewtonsoftJson();
 
 
 
@@ -34,6 +36,8 @@ builder.Services.AddAutoMapper(typeof(Program));//Web API referans�n� verdik
 builder.Services.ConfigureActionFilters();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureDataShaper();
+builder.Services.AddCustomMediaTypes();
+builder.Services.AddScoped<IBookLinks, BookLinks>();
 
 var app = builder.Build();
 
