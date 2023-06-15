@@ -28,6 +28,7 @@ namespace Presentation.Controllers
                 _manager = manager;
             }
 
+            [HttpHead] //Body olmadan direk metadataları aldık.Header ile haberleşme
             [HttpGet]
             [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
             public async Task<IActionResult> GetAllBooksAsync([FromQuery] BookParameters bookParameters)
@@ -104,6 +105,14 @@ namespace Presentation.Controllers
                  }
                 await _manager.BookService.SaveChangesForPatchAsync(result.bookDtoForUpdate,result.book);
                 return NoContent();
+            }
+
+            [HttpOptions] //Kaynakta erişilebilen seçenekler neler onu öğrenmek için kullanıyoruz.
+            public IActionResult GetBooksOptions()
+            {
+                Response.Headers.Add("Allow","GET,POST,DELETE,PUT,PATCH,OPTIONS,HEAD");
+            //Header üzerinden haberleşiyoruz bir content'e ihtiyaç yok.Body yok
+                return Ok();
             }
         }
     }
