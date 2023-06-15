@@ -1,4 +1,5 @@
-﻿using Entities.DataTransferObjects;
+﻿using AspNetCoreRateLimit;
+using Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -100,6 +101,24 @@ namespace WebApi.Extensions
             }
             //Cache için Varnish,Apache Traffic Server,Squid,CDN kütüphaneleri kullanabilirsin..Net validation cache'de bozuk çalışıyor.
             );//Validation  Model
+
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services)
+        {
+            var rateLimitRules = new List<RateLimitRule>()
+            {
+                new RateLimitRule
+                {
+                    Endpoint="*",//hepsi
+                    Limit=3,//dakikada max 3 istek
+                    Period="1m"
+                }
+            };
+            services.Configure<IpRateLimitOptions>(opt => { opt.GeneralRules = rateLimitRules; });
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy,AsyncKeyLockProcessingStrategy>();
+        }
         
     }
 }
