@@ -23,6 +23,10 @@ namespace Repositories.EfCore
 
         public void DeleteOneBook(Book book) => Delete(book);
 
+        public async Task<List<Book>> GetAllBookAsync(bool trackChanges)
+        {
+            return await FindAll(trackChanges).OrderBy(b=>b.Id).ToListAsync();
+        }
 
         public async Task<PagedList<Book>> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges)
         {
