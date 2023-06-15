@@ -15,6 +15,7 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;//İçerik pazarlanacak hale geldi
     config.ReturnHttpNotAcceptable = true;
+    config.CacheProfiles.Add("5mins",new CacheProfile { Duration=300});//Ortak cache profili
 }).AddXmlDataContractSerializerFormatters().AddCustomCsvFormatter().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);//AddNewtonsoftJson();
 
 
@@ -39,6 +40,8 @@ builder.Services.ConfigureDataShaper();
 builder.Services.AddCustomMediaTypes();
 builder.Services.AddScoped<IBookLinks, BookLinks>();
 builder.Services.ConfigureVersioning();
+builder.Services.ConfigureResponseCaching();
+builder.Services.ConfigureHttpCacheHeaders();
 
 var app = builder.Build();
 
@@ -60,6 +63,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
+
+app.UseResponseCaching();//Microsoft,Cors'tan sonra cache çağrılmasını öneriyor.
+
+app.UseHttpCacheHeaders();
 
 app.UseAuthorization();
 

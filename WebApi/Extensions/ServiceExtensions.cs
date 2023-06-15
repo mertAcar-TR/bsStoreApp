@@ -86,5 +86,20 @@ namespace WebApi.Extensions
                 opt.Conventions.Controller<BooksV2Controller>().HasDeprecatedApiVersion(new ApiVersion(2,0));
             });
         }
+
+        public static void ConfigureResponseCaching(this IServiceCollection services) => services.AddResponseCaching();//Expiration Model
+
+        public static void ConfigureHttpCacheHeaders(this IServiceCollection services) => services.AddHttpCacheHeaders(exprationOp =>
+        {
+            exprationOp.MaxAge = 90;
+            exprationOp.CacheLocation = Marvin.Cache.Headers.CacheLocation.Public;
+        },
+            validationOpt =>
+            {
+                validationOpt.MustRevalidate = false;
+            }
+            //Cache için Varnish,Apache Traffic Server,Squid,CDN kütüphaneleri kullanabilirsin..Net validation cache'de bozuk çalışıyor.
+            );//Validation  Model
+        
     }
 }

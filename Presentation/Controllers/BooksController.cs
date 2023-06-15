@@ -2,6 +2,7 @@
 using Entities.Exceptions;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
@@ -20,6 +21,8 @@ namespace Presentation.Controllers
     [ApiController]
     //[Route("api/{v:apiversion}/books")] URL ile versiyonlama
     [Route("api/books")]
+    //[ResponseCache(CacheProfileName="5mins")]//Bütün metodlar için geçerli profil
+    //[HttpCacheExpiration(CacheLocation =CacheLocation.Public,MaxAge =80)]
     public class BooksController:ControllerBase
     {
         
@@ -33,6 +36,8 @@ namespace Presentation.Controllers
             [HttpHead] //Body olmadan direk metadataları aldık.Header ile haberleşme
             [HttpGet(Name = "GetAllBooksAsync")]
             [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
+            //Bu cache üstteki cache'i kırar.
+            //[ResponseCache(Duration =60)] //Postman'de settings de send no cache header kapalı olsun yoksa cache i test edemezsin.
             public async Task<IActionResult> GetAllBooksAsync([FromQuery] BookParameters bookParameters)
             {
             var linkParameters = new LinkParameters() { BookParameters = bookParameters, HttpContext = HttpContext };
