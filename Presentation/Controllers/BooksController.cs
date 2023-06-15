@@ -29,7 +29,7 @@ namespace Presentation.Controllers
             }
 
             [HttpHead] //Body olmadan direk metadataları aldık.Header ile haberleşme
-            [HttpGet]
+            [HttpGet(Name = "GetAllBooksAsync")]
             [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
             public async Task<IActionResult> GetAllBooksAsync([FromQuery] BookParameters bookParameters)
             {
@@ -58,7 +58,7 @@ namespace Presentation.Controllers
             //}
 
             [ServiceFilter(typeof(ValidationFilterAttribute))]//typeof'dan sonra virgül koyup Order property'si ile sıralama yapabiliriz.
-            [HttpPost]
+            [HttpPost(Name = "CreateOneBookAsync")]
             public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
             {
              
