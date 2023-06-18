@@ -1,8 +1,10 @@
 ﻿using AspNetCoreRateLimit;
 using Entities.DataTransferObjects;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Presentation.ActionFilters;
 using Presentation.Controllers;
@@ -10,6 +12,9 @@ using Repositories.Contracts;
 using Repositories.EfCore;
 using Services;
 using Services.Contracts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebApi.Extensions
 {
@@ -109,7 +114,7 @@ namespace WebApi.Extensions
                 new RateLimitRule
                 {
                     Endpoint="*",//hepsi
-                    Limit=3,//dakikada max 3 istek
+                    Limit=60,//dakikada max 3 istek
                     Period="1m"
                 }
             };
@@ -118,6 +123,44 @@ namespace WebApi.Extensions
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
             services.AddSingleton<IProcessingStrategy,AsyncKeyLockProcessingStrategy>();
+        }
+
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            var builder = services.AddIdentity<User, IdentityRole>(opt =>
+            {
+                opt.Password.RequireDigit = true;//şifrede sayı zorunlu
+                opt.Password.RequireLowercase = false;//şifrede küçük harf zorunlu değil
+                opt.Password.RequireUppercase = false;//şifrede büyük hark zorunlu değil
+                opt.Password.RequireNonAlphanumeric = false;//şifrede alfa numerik olmayan karakter zorunlu değil
+                opt.Password.RequiredLength = 6;//şifre en az 6 karakterden oluşmalı
+                opt.User.RequireUniqueEmail = true;//Bir email en fazla bir kere kullanılabilir
+                
+            }).AddEntityFrameworkStores<RepositoryContext>().AddDefaultTokenProviders();
+        }
+
+        public static void ConfigureJWT(this IServiceCollection services,IConfiguration configuration)
+        {
+            var jwtSettings = configuration.GetSection("JwtSettings");
+            var secretKey = jwtSettings["secretKey"];
+
+            //Kullanıcı adı-şifre middleware'ını aktif ettik
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>    
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings["validIssuer"],
+                    ValidAudience = jwtSettings["validAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                }
+            );
         }
         
     }

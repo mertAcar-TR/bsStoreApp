@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Repositories.EfCore;
@@ -11,9 +12,10 @@ using Repositories.EfCore;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230618175912_AddRefreshTokenFields")]
+    partial class AddRefreshTokenFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +115,8 @@ namespace WebApi.Migrations
                     b.Property<string>("RefreshToken")
                         .HasColumnType("text");
 
-                    b.Property<string>("RefreshTokenExpiryTime")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
@@ -167,22 +168,22 @@ namespace WebApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b12438a7-fced-46fe-bdee-87c75ba4aaf5",
-                            ConcurrencyStamp = "a5fc7277-a8ee-4cf4-a35c-9635390fb7f1",
+                            Id = "0ed3aa0d-5d2e-4a2f-ac7e-24941ae9f176",
+                            ConcurrencyStamp = "4f8dbf3a-acdb-4fe9-9d95-66b1e2fea63d",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "f8eb4342-0e36-471a-8aa8-a4d95818009d",
-                            ConcurrencyStamp = "a372a4e7-e531-4789-a4a8-eb5ab61b4bb1",
+                            Id = "86ea4550-84ae-4a0a-aef1-863c0f55855b",
+                            ConcurrencyStamp = "34f412e6-5286-4b18-9cdf-5cc9579c24c0",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
-                            Id = "d5d197c0-2f1d-4959-ac64-0addae0906ec",
-                            ConcurrencyStamp = "07e3c3f1-13ee-4a1d-aa81-b57149629e66",
+                            Id = "daec0076-c817-4210-9bad-1c2868706665",
+                            ConcurrencyStamp = "d9a4b3af-8835-4b78-aa92-63e5e66df523",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

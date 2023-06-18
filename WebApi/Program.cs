@@ -46,6 +46,9 @@ builder.Services.ConfigureHttpCacheHeaders();
 builder.Services.AddMemoryCache();//Hız sınırlandırma için ekledik.
 builder.Services.ConfigureRateLimitingOptions();
 builder.Services.AddHttpContextAccessor();//Hız sınırlaması için ekledik.
+builder.Services.ConfigureIdentity();
+builder.Services.ConfigureJWT(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -73,6 +76,8 @@ app.UseCors("CorsPolicy");
 app.UseResponseCaching();//Microsoft,Cors'tan sonra cache çağrılmasını öneriyor.
 
 app.UseHttpCacheHeaders();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

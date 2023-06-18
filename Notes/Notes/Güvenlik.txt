@@ -1,0 +1,21 @@
+﻿* JWT encrypted(şifrelenmiş) bir yapıda değil kodlanmış bir yapıdadır.Encode edilir yani base64 kullanan herhangi bir decoder ile bu anahtar çözülebileceğinden hassas bilgiler(kullanıcı şifresi vs.) token içine yerleştirilmez.
+
+* Kullanıcı kayıt olur ve bizde ona bir token veririz.Kullanıcı yaptığı istekte header bölümüne Authentication tagı ve Bearer(JWT kullanıcağımız için bearer kullandık) ön ekini kullanarak bu token'ı koyar.Sunucu eğer bu token içindeki principal'ları onaylayamazsa 401(Unauthorized) veya 403 forbidden hata kodu ile dönüş yapar.
+
+* Authorization yetkilendirme demek.Oturum açtıktan sonra yetkilendirme yapılır.
+
+* JWT 3 bölümden oluşur.Her biri nokta ile birbirinden ayrılır.(sırasıyla Header.Payload.Signature):
+  Header => kullanılan algoritmayı ve type'ı içerir.Base64 formatında encode edilir.
+  Payload => kullanıcı ve anahtarı tanımlayan bilgileri içerir.HASSAS BİLGİLER İÇERMEZ!!!
+  Signature => doğrulama amaçlı.Bu token'ı gerçekten bizim sunucumuz mu üretti.(secret key)
+
+* appsettings'deki JWT bölümüne IConfiguration üzerinden erişim sağlayabilirsin.(builder.IConfiguration)
+
+* Postman'de collection'a gelip authorization bölümünde type'ı bearer token yapıp token'ı oraya yapıştırırsan ve methodlardaki authorization bölümünü inherit from parents yaparsan token'ı her yere kopyalamana gerek kalmaz.
+
+* Postman'de accessToken'ı(üstteki token ı değişken olarak tanımladık) otomatik değiştirsin diye Authentication koleksiyonunda authenticate metodunun test bölümüne
+    const response=pm.response.json();
+     let token=response.token;
+    pm.globals.set("accessToken",token); yazdık.
+
+* Server'da Authentication Component diye bir kısım var.İstemci elindeki credentials ile component'e bir istek gönderecek.Biz de ona eğer kullanıcı valid ise bir access token dönücez.Client token'ın expire süresi dolana kadar onu kullanabilir.Bunun için tekrardan kullanıcı adı ve şifresi ile login olması gerekiyor ama kurumsal çalışmalarda böyle olmaz(zaten expire süreleri kısa olur genelde).Çünkü bu tokenlar herhangi bir decoder ile kolayca çözülebilir.Biz de bu yüzden bu tokenların belirli sürelerde yenilenmesi gerekir.Bu yöntemde client, sahip olduğu token'ın  süresi dolduğunda component'a bu sefer bir refresh token gönderir.Server da client'a access token ve refresh token'ı geri yollar.Bu yolla kullanıcı sanki tokenının süresi hiç geçmemiş gibi servar'da yetkili olduğu yerlerde gezebilir ve daha önemlisi daha güvenli bir server olmuş olur.
