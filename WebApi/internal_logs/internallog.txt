@@ -379,3 +379,19 @@
 2023-06-19 11:57:45.3335 Info Message Template Auto Format enabled
 2023-06-19 11:57:45.3715 Info Registered target NLog.Targets.FileTarget(Name=logfile)
 2023-06-19 11:57:45.3831 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=/Users/mertacar/Projects/bsStoreApp/WebApi/nlog.config
+2023-06-19 12:44:40.4338 Info Message Template Auto Format enabled
+2023-06-19 12:44:40.4685 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-19 12:44:40.5022 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=/Users/mertacar/Projects/bsStoreApp/WebApi/nlog.config
+2023-06-19 12:44:41.2079 Info AppDomain Shutting down. LogFactory closing...
+2023-06-19 12:44:41.2108 Info LogFactory has been closed.
+2023-06-19 12:44:53.5961 Info Message Template Auto Format enabled
+2023-06-19 12:44:53.6275 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-19 12:44:53.6531 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=/Users/mertacar/Projects/bsStoreApp/WebApi/nlog.config
+2023-06-19 12:44:57.4736 Info AppDomain Shutting down. LogFactory closing...
+2023-06-19 12:44:57.4767 Info LogFactory has been closed.
+2023-06-19 13:02:35.0200 Info Message Template Auto Format enabled
+2023-06-19 13:02:35.0564 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-19 13:02:35.0707 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=/Users/mertacar/Projects/bsStoreApp/WebApi/nlog.config
+2023-06-19 17:21:46.6247 Info Message Template Auto Format enabled
+2023-06-19 17:21:46.6611 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-06-19 17:21:46.6893 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=/Users/mertacar/Projects/bsStoreApp/WebApi/nlog.config
