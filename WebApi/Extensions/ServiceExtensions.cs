@@ -15,14 +15,15 @@ using Services.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 namespace WebApi.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void ConfigureSqlContext(this IServiceCollection services,IConfiguration configuration)=> services.AddDbContext<RepositoryContext>(options => options.UseNpgsql(configuration.GetConnectionString("sqlConnection")));
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) => services.AddDbContext<RepositoryContext>(options => options.UseNpgsql(configuration.GetConnectionString("sqlConnection")));
 
-        public static void ConfigureRepositoryManager(this IServiceCollection services)=>services.AddScoped<IRepositoryManager, RepositoryManager>();
+        public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
 
         public static void ConfigureServiceManager(this IServiceCollection services) => services.AddScoped<IServiceManager, ServiceManager>();
 
@@ -33,13 +34,13 @@ namespace WebApi.Extensions
             services.AddScoped<ValidationFilterAttribute>();
             services.AddSingleton<LogFilterAttribute>();//Logger'ı kullandığın yerde ver.
             services.AddScoped<ValidateMediaTypeAttribute>();
-            
+
         }
         public static void ConfigureCors(this IServiceCollection services)
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("X-Pagination"));
+                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("X-Pagination"));
             });
         }
 
@@ -86,10 +87,10 @@ namespace WebApi.Extensions
             {
                 opt.ReportApiVersions = true;//header'a versiyon bilgisini ekledik
                 opt.AssumeDefaultVersionWhenUnspecified = true;//talep yoksa default versiyon bilgisi
-                opt.DefaultApiVersion = new ApiVersion(1,0);//Major değişiklikler 1,küçük değişiklikler sıfır
+                opt.DefaultApiVersion = new ApiVersion(1, 0);//Major değişiklikler 1,küçük değişiklikler sıfır
                 opt.ApiVersionReader = new HeaderApiVersionReader("api-version");//header ile versiyonlama
-                opt.Conventions.Controller<BooksController>().HasApiVersion(new ApiVersion(1,0));
-                opt.Conventions.Controller<BooksV2Controller>().HasDeprecatedApiVersion(new ApiVersion(2,0));
+                opt.Conventions.Controller<BooksController>().HasApiVersion(new ApiVersion(1, 0));
+                opt.Conventions.Controller<BooksV2Controller>().HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
         }
 
@@ -122,7 +123,7 @@ namespace WebApi.Extensions
             services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-            services.AddSingleton<IProcessingStrategy,AsyncKeyLockProcessingStrategy>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
         }
 
         public static void ConfigureIdentity(this IServiceCollection services)
@@ -135,11 +136,11 @@ namespace WebApi.Extensions
                 opt.Password.RequireNonAlphanumeric = false;//şifrede alfa numerik olmayan karakter zorunlu değil
                 opt.Password.RequiredLength = 6;//şifre en az 6 karakterden oluşmalı
                 opt.User.RequireUniqueEmail = true;//Bir email en fazla bir kere kullanılabilir
-                
+
             }).AddEntityFrameworkStores<RepositoryContext>().AddDefaultTokenProviders();
         }
 
-        public static void ConfigureJWT(this IServiceCollection services,IConfiguration configuration)
+        public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
             var secretKey = jwtSettings["secretKey"];
@@ -149,7 +150,7 @@ namespace WebApi.Extensions
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>    
+            }).AddJwtBearer(options =>
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -162,6 +163,51 @@ namespace WebApi.Extensions
                 }
             );
         }
-        
+
+        public static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "BTK Akademi",
+                    Version = "v1",
+                    Description="BTK Akademi ASP.NET Core Web API",
+                    TermsOfService=new Uri("https://www.btkakademi.gov.tr/"),
+                    Contact=new OpenApiContact
+                    {
+                        Name="Mert Acar",
+                        Email="mert@mert.com",
+                        Url=new Uri("https://github.com/mertACAR-TR")
+                    }
+                });
+                s.SwaggerDoc("v2", new OpenApiInfo { Title = "BTK Akademi", Version = "v2" });
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Place to add JWT with Bearer",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            },
+                            Name = "Bearer"
+                        },
+                        new List<string>()
+                    }
+                });
+            });
+        }
+
     }
 }

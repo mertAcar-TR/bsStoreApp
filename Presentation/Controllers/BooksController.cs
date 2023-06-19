@@ -24,6 +24,7 @@ namespace Presentation.Controllers
     [Route("api/books")]
     //[ResponseCache(CacheProfileName="5mins")]//Bütün metodlar için geçerli profil
     //[HttpCacheExpiration(CacheLocation =CacheLocation.Public,MaxAge =80)]
+    [ApiExplorerSettings(GroupName = "v1")]
     public class BooksController : ControllerBase
     {
 

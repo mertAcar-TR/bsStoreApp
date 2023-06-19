@@ -7,7 +7,8 @@ namespace Presentation.Controllers
 {
 	[ApiController]
 	[Route("api")]
-	public class RootController:ControllerBase
+    [ApiExplorerSettings(GroupName = "v1")]
+    public class RootController:ControllerBase
 	{
         //Root Documentation=Uygulama başladığında kullanıcıyı yönlendirmek,etkileşime geçmek.
 
