@@ -16,8 +16,8 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;//İçerik pazarlanacak hale geldi
     config.ReturnHttpNotAcceptable = true;
-    config.CacheProfiles.Add("5mins",new CacheProfile { Duration=300});//Ortak cache profili
-}).AddXmlDataContractSerializerFormatters().AddCustomCsvFormatter().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);//AddNewtonsoftJson();
+    config.CacheProfiles.Add("5mins", new CacheProfile { Duration = 300 });//Ortak cache profili
+}).AddXmlDataContractSerializerFormatters().AddCustomCsvFormatter().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);//AddNewtonsoftJson(opt=>opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 
 

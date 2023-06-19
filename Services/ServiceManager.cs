@@ -21,8 +21,8 @@ namespace Services
 
         public ServiceManager(IRepositoryManager repositoryManager,ILoggerService loggerService,IMapper mapper,UserManager<User> userManager,IConfiguration configuration,IBookLinks bookLinks)
         {
-            _bookService = new Lazy<IBookService>(()=>new BookManager(repositoryManager, loggerService,mapper,bookLinks));
-            _categoryService = new Lazy<ICategoryService>(()=> new CategoryManager(repositoryManager));
+            _categoryService = new Lazy<ICategoryService>(() => new CategoryManager(repositoryManager));
+            _bookService = new Lazy<IBookService>(()=>new BookManager(repositoryManager, loggerService,mapper,bookLinks,_categoryService.Value));
             _authenticationService = new Lazy<IAuthenticationService>(()=>new AuthenticationManager(loggerService, mapper,userManager,configuration));
         }
 

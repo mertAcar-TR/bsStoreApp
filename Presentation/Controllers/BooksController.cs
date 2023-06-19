@@ -51,6 +51,13 @@ namespace Presentation.Controllers
         }
 
         [Authorize]
+        [HttpGet("details")]
+        public async Task<IActionResult> GetAllBooksWithDetailsAsync()
+        {
+            return Ok(await _manager.BookService.GetAllBooksWithDetailsAsync(false));
+        }
+
+        [Authorize]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetBookAsync([FromRoute(Name = "id")] int id)
         {
@@ -68,7 +75,7 @@ namespace Presentation.Controllers
         //    _logger.LogWarning("Book has been created!");
         //    return StatusCode(201);//created
         //}
-        [Authorize(Roles = "Admin,Editor")]
+        //[Authorize(Roles = "Admin,Editor")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]//typeof'dan sonra virgül koyup Order property'si ile sıralama yapabiliriz.
         [HttpPost(Name = "CreateOneBookAsync")]
         public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
